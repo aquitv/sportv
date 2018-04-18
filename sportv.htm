@@ -1,21 +1,22 @@
-<script src="https://content.jwplatform.com/libraries/zkpZNdwa.js"></script>
-<div id='playerBLiyUVVsMPRD'></div>
-<script type="text/javascript">
-    var player = jwplayer('playerBLiyUVVsMPRD');
-        jwplayer("playerBLiyUVVsMPRD").setup({
-            file: "http://149.56.16.58:25461/live/cineiptv3473/f5Pxwfrs8c/1861.m3u8",
-            image: "../../img/sportv.png",
-            autostart: true,
-            hlshtml: true,
-            width: '640',
-            height: '360',
-            logo: {
-            },
-            skin: {
-                name: "seven"
-            }
-        });
-    </script>
-
-
-<script src="https://apis.google.com/js/platform.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<video id="video"></video>
+<script>
+  var video = document.getElementById('video');
+  if(Hls.isSupported()) {
+    var hls = new Hls();
+    hls.loadSource('http://andre.iptvbr.tv:8080/live/Apptv/7rkfWKzgON/553.m3u8');
+    hls.attachMedia(video);
+    hls.on(Hls.Events.MANIFEST_PARSED,function() {
+      video.play();
+  });
+ }
+ // hls.js is not supported on platforms that do not have Media Source Extensions (MSE) enabled.
+ // When the browser has built-in HLS support (check using `canPlayType`), we can provide an HLS manifest (i.e. .m3u8 URL) directly to the video element throught the `src` property.
+ // This is using the built-in support of the plain video element, without using hls.js.
+  else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+    video.src = 'http://andre.iptvbr.tv:8080/live/Apptv/7rkfWKzgON/553.m3u8';
+    video.addEventListener('canplay',function() {
+      video.play();
+    });
+  }
+</script>
