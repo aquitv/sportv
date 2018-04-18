@@ -1,14 +1,30 @@
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<video id="video"></video>
-<script>
-  var video = document.getElementById('video');
-  if(Hls.isSupported()) {
-    var hls = new Hls();
-    hls.loadSource('http://andre.iptvbr.tv:8080/live/Apptv/7rkfWKzgON/553.m3u8');
-    hls.attachMedia(video);
-    hls.on(Hls.Events.MANIFEST_PARSED,function() {
-      video.play();
-  });
- }
- 
-</script>
+ <!DOCTYPE html>
+    <html>
+    <head>
+    <meta charset=utf-8 />
+    <title>videojs-contrib-hls</title>
+
+    <link href="https://unpkg.com/video.js@6.4.0/dist/video-js.css" rel="stylesheet">
+    <script src="https://unpkg.com/video.js@6.4.0/dist/video.js"></script>
+    <script src="https://unpkg.com/videojs-flash@2.0.1/dist/videojs-flash.js"></script>
+    <script src="https://unpkg.com/videojs-contrib-hls@5.12.2/dist/videojs-contrib-hls.js"></script>
+
+    </head>
+    <body>
+      <h1>Video.js Example Embed</h1>
+      <video id="my_video_1" class="video-js vjs-default-skin" controls preload="auto" width="600" height="268" 
+       data-setup='{}'>
+        <source src="http://andre.iptvbr.tv:8080/live/Apptv/7rkfWKzgON/553.m3u8" type="application/x-mpegURL">
+      </video>
+      <script>
+        let videojshls= videojs('my_video_1', {  html5: {  
+        nativeAudioTracks: false,
+        nativeVideoTracks: false,
+        hls: {
+          debug: true,
+          overrideNative: false
+        }
+       }});
+      </script>
+    </body>
+    </html>
